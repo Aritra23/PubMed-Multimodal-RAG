@@ -68,3 +68,8 @@ async def get_answer(question: str = Form(...)):
             relevant_images.append(d.metadata['original_content'])
     result = qa_chain.run({'context': context, 'question': question})
     return JSONResponse({"relevant_images": relevant_images[0], "result": result})
+
+
+if __name__ == '__main__':
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
