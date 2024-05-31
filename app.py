@@ -16,7 +16,7 @@ from fastapi.encoders import jsonable_encoder
 from fastapi.middleware.cors import CORSMiddleware
 import json
 from dotenv import load_dotenv
-# load_dotenv()
+load_dotenv()
 
 app = FastAPI()
 templates = Jinja2Templates(directory="templates")
@@ -67,7 +67,10 @@ async def get_answer(question: str = Form(...)):
             context += '[image]' + d.page_content
             relevant_images.append(d.metadata['original_content'])
     result = qa_chain.run({'context': context, 'question': question})
-    return JSONResponse({"relevant_images": relevant_images[0], "result": result})
+    if(len(relevant_images) > 0):
+        return JSONResponse({"relevant_images": relevant_images[0], "result": result})
+    else:
+        return JSONResponse({"result": result})
 
 
 if __name__ == '__main__':
