@@ -30,8 +30,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# openai_api_key = os.getenv("OPENAI_API_KEY")
-openai_api_key = "sk-proj-V05L285yumORpe1qATVFT3BlbkFJH0GqGPdHNDXg0NY4hV5I"
+openai_api_key = os.getenv("OPENAI_API_KEY")
 embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
 
 db = FAISS.load_local("faiss_index", embeddings, allow_dangerous_deserialization=True)
