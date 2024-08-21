@@ -35,7 +35,7 @@ embeddings = OpenAIEmbeddings(openai_api_key=openai_api_key)
 
 db = FAISS.load_local("faiss_index", embeddings, allow_dangerous_deserialization=True)
 
-prompt_template = """You are a doctor and an expert in analyzing cancer, diabetes and dog's health.
+prompt_template = """You are an expert in analyzing Alzheimer disease.
 Answer the question based only on the following context, which can include text, images and tables:
 {context}
 Question: {question}
@@ -44,7 +44,7 @@ Just return the helpful answer in as much as detailed possible.
 Answer:
 """
 
-qa_chain = LLMChain(llm=ChatOpenAI(model="gpt-4", openai_api_key = openai_api_key, max_tokens=1024),
+qa_chain = LLMChain(llm=ChatOpenAI(model="gpt-4o", openai_api_key = openai_api_key, max_tokens=1024),
                     prompt=PromptTemplate.from_template(prompt_template))
 
 @app.get("/", response_class=HTMLResponse)
